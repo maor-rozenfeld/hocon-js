@@ -20,12 +20,12 @@ function parseHocon(text) {
 
             if (!isEscaping && (c === '\'' || c === '"')) {
               if (isInQuotes && quotesType === c) {
-                isInQuotes = false;
                 if (isReadingValue)
                   setValue();
                 else {
                   isReadingValue = true;
                 }
+                isInQuotes = false;
                 continue;
               }
 
@@ -125,6 +125,9 @@ function parseHocon(text) {
         if (isInCurly)
           throw 'Expected closing curly bracket';
 
+        if (isInArray)
+          throw 'Expected closing square bracket';
+
         if (isReadingValue) {
           setValue();
         }
@@ -141,10 +144,12 @@ function parseHocon(text) {
               return;
           }
 
-          if (/^\d+$/.test(currentValue))
-            currentValue = parseInt(currentValue);
-          else if (/^\d+\.\d+$/.test(currentValue))
-            currentValue = parseFloat(currentValue);
+          if (!isInQuotes) {
+            if (/^\d+$/.test(currentValue))
+              currentValue = parseInt(currentValue);
+            else if (/^\d+\.\d+$/.test(currentValue))
+              currentValue = parseFloat(currentValue);
+          }
 
           if (isInArray) {
             objt.push(currentValue);
