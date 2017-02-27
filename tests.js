@@ -84,3 +84,13 @@ QUnit.test('ignore comment', function( assert ) {
   assert.ok(obj.x === 10);
   assert.ok(typeof obj['#'] === 'undefined');
 });
+
+QUnit.test('ignore comment same line', function( assert ) {
+  var obj = parseHocon(`{
+      x : 10# this isn\'t a field
+      y : 10 # this isn\'t a field
+    }`);
+  assert.ok(obj.x === 10);
+  assert.ok(obj.y === 10);
+  assert.ok(typeof obj['#'] === 'undefined');
+});
