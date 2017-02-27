@@ -123,7 +123,8 @@ function parseHocon(text) {
               case ']': {
                 if (!isInArray)
                   throw 'not in an array';
-                setValue();
+                if (currentValue)
+                  setValue();
                 return obj;
               }
               case '$': {
