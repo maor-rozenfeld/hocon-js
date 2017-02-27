@@ -1,5 +1,5 @@
 
-This is a very basic Hocon parser written in JavaScript.
+This is a very basic [Hocon](https://github.com/typesafehub/config/blob/master/HOCON.md) parser written in JavaScript. 
 
 It does almost no validation whatsoever but can create an object from most hocon files.
 
