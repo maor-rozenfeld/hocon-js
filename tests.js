@@ -59,7 +59,7 @@ QUnit.test("parse array in field", function( assert ) {
   assert.ok( obj.x[0] === 2);
   assert.ok( obj.x[1] === 5);
 });
-
+// { x {  } }
 QUnit.test("parse objects in array", function( assert ) {
   var obj = parseHocon('{x:[\'a\',\'b\',{c:3},5]}');
   assert.ok( obj.x.length === 4);
@@ -67,4 +67,11 @@ QUnit.test("parse objects in array", function( assert ) {
   assert.ok( obj.x[1] === 'b');
   assert.ok( obj.x[2].c === 3);
   assert.ok( obj.x[3] === 5);
+});
+
+QUnit.test('parse basic subtitutions', function( assert ) {
+  var obj = parseHocon('{ x: 5, y: ${x}}');
+  assert.ok(obj.x === 5);
+  assert.ok(obj.y === 5);
+  console.log(obj);
 });

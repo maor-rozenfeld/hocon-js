@@ -1,6 +1,7 @@
 function parseHocon(text) {
     var index = 0;
-    return readHocon(text);
+    var result = readHocon(text);
+    return handleSubtitutions(result);
 
     function readHocon(hoconText) {
         var isInQuotes = false;
@@ -77,10 +78,12 @@ function parseHocon(text) {
               }
               case '}': {
                 if (!isInCurly)
-                    throw 'What';
+                  throw 'What';
 
                 if (currentValue)
                   setValue();
+                else if (currentKey)
+                  return currentKey;
 
                 return obj;
               }
@@ -114,6 +117,14 @@ function parseHocon(text) {
                   throw 'not in an array';
                 setValue();
                 return obj;
+              }
+              case '$': {
+                if (!currentValue) {
+                  currentValue = '${' + readHocon(hoconText) + '}';
+                  setValue();
+                  continue;
+                }
+                break;
               }
             }
 
@@ -162,5 +173,30 @@ function parseHocon(text) {
           currentKey = '';
           currentValue = '';
         }
+    }
+
+    function handleSubtitutions(mainObj, intermidiateObj, loops) {
+      intermidiateObj = typeof intermidiateObj === 'undefined' ? mainObj : intermidiateObj;
+      if (intermidiateObj == null)
+        return intermidiateObj;
+
+      if (Array.isArray(intermidiateObj)) {
+        intermidiateObj.forEach(function(element, index) {
+          intermidiateObj[index] = handleSubtitutions(mainObj, element);
+        });
+      }
+      else if (typeof intermidiateObj === 'string') {
+        var match = /^\$\{(.+?)\}$/.exec(intermidiateObj);
+        if (match && match.length == 2) {
+            return eval('mainObj.' + match[1]);
+        }
+      }
+      else if (typeof intermidiateObj === 'object') {
+        Object.keys(intermidiateObj).forEach(function(key,index) {
+            intermidiateObj[key] = handleSubtitutions(mainObj, intermidiateObj[key]);
+        });
+      }
+
+      return intermidiateObj;
     }
 };
