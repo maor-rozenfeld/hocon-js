@@ -13,6 +13,7 @@ function parseHocon(text) {
         var isReadingValue = false;
         var isReadSeperator = false;
         var isInlineComment = false;
+        var possibleInlineCommentWithSlashes = false;
         var currentKey = '';
         var currentValue = '';
         var obj = {};
@@ -137,6 +138,16 @@ function parseHocon(text) {
               }
               case '#': {
                 isInlineComment = true;
+                continue;
+              }
+              case '/': {
+                if (possibleInlineCommentWithSlashes) {
+                    isInlineComment = true;
+                    possibleInlineCommentWithSlashes = false;
+                }
+                else {
+                    possibleInlineCommentWithSlashes = true;
+                }
                 continue;
               }
             }
