@@ -90,7 +90,7 @@ QUnit.test('parse basic subtitutions', function( assert ) {
 QUnit.test('ignore comment', function( assert ) {
   var obj = parseHocon(`{
       # this isn\'t a field
-      x : 10
+      x : 10    // Another amazing comment
     }`);
   assert.ok(obj.x === 10);
   assert.ok(typeof obj['#'] === 'undefined');
@@ -100,6 +100,7 @@ QUnit.test('ignore comment same line', function( assert ) {
   var obj = parseHocon(`{
       x : 10# this isn\'t a field
       y : 10 # this isn\'t a field
+      // This is also a valid comment
     }`);
   assert.ok(obj.x === 10);
   assert.ok(obj.y === 10);
