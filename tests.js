@@ -107,3 +107,17 @@ QUnit.test('ignore comment same line', function(assert) {
   assert.equal(obj.y, 10);;
   assert.equal(typeof obj['#'], 'undefined');;
 });
+
+
+
+QUnit.test('extend rather than override', function(assert) {
+  var obj = parseHocon(
+    `{
+      x.fudge { fudginess: 10, tastiness: 90 }
+      x.fudge { fudginess: 100, softness: 40 }
+    }`
+  );
+  assert.equal(obj.x.fudge.fudginess, 100);;
+  assert.equal(obj.x.fudge.tastiness, 90);;
+  assert.equal(obj.x.fudge.softness, 40);;
+});
