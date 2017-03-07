@@ -142,3 +142,11 @@ QUnit.test('extend rather than override', function(assert) {
   assert.equal(obj.x.fudge.tastiness, 90);
   assert.equal(obj.x.fudge.softness, 40);
 });
+
+QUnit.test('Parse URL fields correctly', function(assert) {
+  var obj = parseHocon(
+    `myUrl = 'http://www.hoconjs.com/kiss/my?zenthia=please#ok' //some comment`
+  );
+  assert.equal(obj.myUrl,
+    'http://www.hoconjs.com/kiss/my?zenthia=please#ok');
+});
