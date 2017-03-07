@@ -1,7 +1,14 @@
 function parseHocon(text) {
   var index = 0;
-  var result = readHocon(text);
+
+  var cleanHocon = removeComments(text);
+  var result = readHocon(cleanHocon);
   return handleSubtitutions(result);
+
+  function removeComments(hoconString) {
+    var cleanCommentsRegex = /\/\/.+|#.+/g;
+    return hoconString.replace(cleanCommentsRegex, '');
+  }
 
   function readHocon(hoconText) {
     var isInQuotes = false;
