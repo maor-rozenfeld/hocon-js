@@ -21,10 +21,10 @@ Usage:
      }
   }
   myConfig.cool.stuff { z { no='yes yes really' } }
-  myConfig.dupe: \${myConfig.cool.stuff.x}
+  myConfig.dupe: ${myConfig.cool.stuff.x}
   meinarr [2,3, {x:haha}]
   meinobj {hocon: issoweirdman}
-  notherobj : \${meinobj.hocon}
+  notherobj : ${meinobj.hocon}
 ```
 
 **Output object:**
@@ -56,4 +56,5 @@ Usage:
 ## Missing features
 * Multiline comments
 * Syntax errors *(it may parse things that shouldn't be parsed)*
+* Triple quotes for multiline values
 * Other advanced stuff
