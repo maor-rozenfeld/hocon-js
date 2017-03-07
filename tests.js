@@ -88,10 +88,12 @@ QUnit.test('parse basic subtitutions', function(assert) {
 });
 
 QUnit.test('ignore comment', function(assert) {
-  var obj = parseHocon(`{
+  var obj = parseHocon(
+    `{
       # this isn\'t a field
-      x : 10
-    }`);
+      x : 10  // This also isn\'t a field
+    }`
+  );
   assert.equal(obj.x, 10);;
   assert.equal(typeof obj['#'], 'undefined');;
 });
@@ -101,6 +103,7 @@ QUnit.test('ignore comment same line', function(assert) {
     `{
       x : 10# this isn\'t a field
       y : 10 # this isn\'t a field
+      // This is just another comment
     }`
   );
   assert.equal(obj.x, 10);;
