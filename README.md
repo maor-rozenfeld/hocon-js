@@ -1,5 +1,5 @@
 
-This is a very basic [Hocon](https://github.com/typesafehub/config/blob/master/HOCON.md) parser written in JavaScript. 
+This is a very basic [Hocon](https://github.com/typesafehub/config/blob/master/HOCON.md) parser written in JavaScript.
 
 It does almost no validation whatsoever but can create an object from most hocon files.
 
@@ -15,15 +15,16 @@ Usage:
 ```
   myConfig.cool.numb: 5
   myConfig.cool.stuff: {
-      x : quotesarebadmmkay
-      z : {
-        yes: 'no not really'
-      }
+     x : quotesarebadmmkay
+     z : {
+       yes: 'no not really'
+     }
   }
-  myConfig.dupe: ${myConfig.cool.stuff.x}
+  myConfig.cool.stuff { z { no='yes yes really' } }
+  myConfig.dupe: \${myConfig.cool.stuff.x}
   meinarr [2,3, {x:haha}]
   meinobj {hocon: issoweirdman}
-  notherobj : ${meinobj.hocon}
+  notherobj : \${meinobj.hocon}
 ```
 
 **Output object:**
@@ -35,19 +36,16 @@ Usage:
       "stuff": {
         "x": "quotesarebadmmkay",
         "z": {
-          "yes": "no not really"
+          "yes": "no not really",
+          "no": "yes yes really"
         }
       }
     },
     "dupe": "quotesarebadmmkay"
   },
-  "meinarr": [
-    2,
-    3,
-    {
-      "x": "haha"
-    }
-  ],
+  "meinarr": [2, 3, {
+    "x": "haha"
+  }],
   "meinobj": {
     "hocon": "issoweirdman"
   },
@@ -58,5 +56,4 @@ Usage:
 ## Missing features
 * Multiline comments
 * Syntax errors *(it may parse things that shouldn't be parsed)*
-* Merging objects
 * Other advanced stuff
