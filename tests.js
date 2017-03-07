@@ -20,7 +20,7 @@ QUnit.test("parse two fields by newline", function(assert) {
   assert.equal(obj.y, 6);
 });
 
-QUnit.test("parse object inside another object", function(assert) {
+QUnit.test("parse nested object", function(assert) {
   var obj = parseHocon('{ x { y : 6 }}');
   assert.equal(obj.x.y, 6);
 });
@@ -88,7 +88,34 @@ QUnit.test('parse array with trailing comma', function(assert) {
   assert.equal(obj.y, 2);
 });
 
-QUnit.test('parse basic subtitutions', function(assert) {
+QUnit.test('parse array with newline delimiter', function(assert) {
+  var obj = parseHocon(`{
+    a: [1
+    2
+    3]
+  }`);
+  assert.equal(Object.keys(obj).length, 1);
+  assert.equal(obj.a.length, 3);
+  assert.equal(obj.a[0], 1);
+  assert.equal(obj.a[1], 2);
+  assert.equal(obj.a[2], 3);
+});
+
+QUnit.test('multiple nested arrays', function(assert) {
+  var obj = parseHocon(
+    `{
+    a: [[1,2], [9,8,7,6]],
+    b: { x:1, y:[1, { c: [12, 34] }] }
+  }`
+  );
+  assert.equal(Object.keys(obj).length, 2);
+  assert.equal(obj.a.length, 2);
+  assert.equal(obj.a[0].length, 2);
+  assert.equal(obj.a[1].length, 4);
+  assert.equal(obj.b.y[1].c.length, 2);
+});
+
+QUnit.test('parse basic substitutions', function(assert) {
   var obj = parseHocon('{ x: 5, y: ${x}}');
   assert.equal(obj.x, 5);
   assert.equal(obj.y, 5);
