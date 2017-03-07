@@ -13,9 +13,11 @@ function parseHocon(text) {
     var isReadingValue = false;
     var isReadSeperator = false;
     var isInlineComment = false;
+    var possibleComment = false;
     var currentKey = '';
     var currentValue = '';
     var obj = {};
+
     while (index < hoconText.length) {
       var c = hoconText[index];
       index++;
@@ -144,6 +146,16 @@ function parseHocon(text) {
           case '#':
             {
               isInlineComment = true;
+              continue;
+            }
+          case '/':
+            {
+              if (possibleComment) {
+                isInlineComment = true;
+                possibleComment = false;
+                continue;
+              }
+              possibleComment = true;
               continue;
             }
         }
