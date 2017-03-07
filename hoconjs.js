@@ -1,14 +1,7 @@
 function parseHocon(text) {
   var index = 0;
-
-  var cleanHocon = removeComments(text);
-  var result = readHocon(cleanHocon);
+  var result = readHocon(text);
   return handleSubtitutions(result);
-
-  function removeComments(hoconString) {
-    var cleanCommentsRegex = /\/\/.+|#.+/g;
-    return hoconString.replace(cleanCommentsRegex, '');
-  }
 
   function readHocon(hoconText) {
     var isInQuotes = false;
@@ -19,6 +12,7 @@ function parseHocon(text) {
     var isInArray = false;
     var isReadingValue = false;
     var isReadSeperator = false;
+    var isInlineComment = false;
     var possibleComment = false;
     var currentKey = '';
     var currentValue = '';
@@ -27,6 +21,13 @@ function parseHocon(text) {
     while (index < hoconText.length) {
       var c = hoconText[index];
       index++;
+
+      if (isInlineComment) {
+        if (c === '\r' || c === '\n') {
+          isInlineComment = false;
+        }
+        continue;
+      }
 
       if (!isEscaping && (c === '\'' || c === '"')) {
         if (isInQuotes && quotesType === c) {
@@ -149,6 +150,11 @@ function parseHocon(text) {
                 continue;
               }
               break;
+            }
+          case '#':
+            {
+              isInlineComment = true;
+              continue;
             }
           case '/':
             {
