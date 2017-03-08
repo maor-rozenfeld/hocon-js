@@ -60,7 +60,7 @@ function parseHocon(text) {
           case '\n':
             {
               if (isInArray && isReadingValue) {
-                if (currentValue.trim() === '')
+                if (currentValue === '')
                   continue;
 
                 setValue();
