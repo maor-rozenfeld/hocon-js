@@ -59,6 +59,14 @@ function parseHocon(text) {
           case '\r':
           case '\n':
             {
+              if (isInArray && isReadingValue) {
+                if (currentValue === '')
+                  continue;
+
+                setValue();
+                continue;
+              }
+
               if (!currentKey)
                 continue;
 
