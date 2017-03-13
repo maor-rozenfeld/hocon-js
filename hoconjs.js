@@ -14,6 +14,7 @@ function parseHocon(text) {
     var isReadSeperator = false;
     var isInlineComment = false;
     var possibleComment = false;
+    var isInMultilineString = false;
     var currentKey = '';
     var currentValue = '';
     var obj = {};
@@ -22,14 +23,35 @@ function parseHocon(text) {
       var c = hoconText[index];
       index++;
 
-      if (isInlineComment) {
+      if (isInlineComment && !isInMultilineString) {
         if (c === '\r' || c === '\n') {
           isInlineComment = false;
         }
         continue;
       }
 
-      if (!isEscaping && (c === '\'' || c === '"')) {
+      if (!isEscaping && c === '"') {
+        if ((index + 1 < hoconText.length) && hoconText[index] === '"' &&
+          hoconText[index + 1] === '"') {
+          if (isInMultilineString) {
+            setValue();
+            isInMultilineString = false;
+            isInQuotes = false;
+            isReadingValue = false;
+            index += 2;
+            // TODO: if this is followed by another quote, then it's not over..
+            continue;
+          }
+
+          isInMultilineString = true;
+          isInQuotes = true;
+          isReadingValue = true;
+          index += 2;
+          continue;
+        }
+      }
+
+      if (!isEscaping && !isInMultilineString && (c === '\'' || c === '"')) {
         if (isInQuotes && quotesType === c) {
           if (isReadingValue)
             setValue();
@@ -42,6 +64,11 @@ function parseHocon(text) {
 
         isInQuotes = true;
         quotesType = c;
+        continue;
+      }
+
+      if (isInMultilineString && escapeInMultiLine(c)) {
+        currentValue += c;
         continue;
       }
 
@@ -168,10 +195,11 @@ function parseHocon(text) {
             }
         }
 
-      if (isReadingValue)
+      if (isReadingValue) {
         currentValue += c;
-      else
+      } else {
         currentKey += c;
+      }
     }
     if (isInCurly)
       throw 'Expected closing curly bracket';
@@ -183,6 +211,10 @@ function parseHocon(text) {
       setValue();
     }
     return obj;
+
+    function escapeInMultiLine(char) {
+      return ['"', '\\'].indexOf(char) !== -1;
+    }
 
     function setValue(key, objt) {
       var key = key || currentKey;
