@@ -177,3 +177,16 @@ QUnit.test('Parse URL fields correctly', function(assert) {
   assert.equal(obj.myUrl,
     'http://www.hoconjs.com/kiss/my?zenthia=please#ok');
 });
+
+QUnit.test('Multiline strings as values', function(assert) {
+  var obj = parseHocon(
+    `{
+    a: """This is
+a multiline string.
+...and it even has some "quotes" in it."""
+  }`
+  );
+  assert.equal(obj.a,
+    'This is\na multiline string.\n...and it even has some "quotes" in it.'
+  );
+});
