@@ -56,7 +56,7 @@ Usage:
 ## Features
 
 | Feature | Completion  | Example
-|-----|-----|
+|---------|-------------|--------|
 | Objects | :white_check_mark: | `myKey { myOtherKey: 'myValue' }`
 | Arrays | :white_check_mark: | `myKey [1,2,3,4]`
 | Comments | :white_check_mark: | `// some comment` `# some comment`
