@@ -53,8 +53,18 @@ Usage:
 }
 ```
 
-## Missing features
-* Multiline comments
-* Syntax errors *(it may parse things that shouldn't be parsed)*
-* Triple quotes for multiline values
-* Other advanced stuff
+## Features
+
+| Feature | Completion  | Example
+|-----|-----|
+| Objects | :white_check_mark: | `myKey { myOtherKey: 'myValue' }`
+| Arrays | :white_check_mark: | `myKey [1,2,3,4]`
+| Comments | :white_check_mark: | `// some comment` `# some comment`
+| `=` and `:` Separators | :white_check_mark: | `myKey='myValue'`
+| Unquoted Strings | :white_check_mark: | `myKey: myString`
+| Multiline Strings (`"""`) |  :white_check_mark: | `myKey: """what's happening"""`
+| Path Expressions |  :white_check_mark: | `myRoot.myKey.someKey : 4`
+| Substitutions |  :white_check_mark: | `myKey: $(myRoot.myKey)`
+| Objects Merging | :x: | |
+| Value Concatenation | :x: | |
+| `include` | :x: | | |
