@@ -191,7 +191,6 @@ a multiline string.
   );
 });
 
-
 QUnit.test('String concatenation on array values without comma', function(
   assert) {
   var obj = parseHocon('{ a: [ 1 2 3 4 ]}');
