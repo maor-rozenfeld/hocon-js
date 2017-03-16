@@ -173,10 +173,12 @@ function parseHocon(text) {
             {
               if (!isInArray)
                 throw 'not in an array';
+
               if (currentValue) {
                 currentValue = currentValue.trim();
                 setValue();
               }
+
               return obj;
             }
           case '$':

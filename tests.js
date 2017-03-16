@@ -59,7 +59,7 @@ QUnit.test("parse array in field", function(assert) {
   assert.equal(obj.x[0], 2);
   assert.equal(obj.x[1], 5);
 });
-// { x {  } }
+
 QUnit.test("parse objects in array", function(assert) {
   var obj = parseHocon('{x:[\'a\',\'b\',{c:3},5]}');
   assert.equal(obj.x.length, 4);
@@ -193,7 +193,9 @@ a multiline string.
 
 QUnit.test('String concatenation on array values without comma', function(
   assert) {
-  var obj = parseHocon('{ a: [ 1 2 3 4 ]}');
+  var obj = parseHocon(`{
+    a: [ 1 2 3 4 ]
+  }`);
   assert.equal(obj.a.length, 1);
   assert.equal(obj.a[0], '1 2 3 4');
 });
