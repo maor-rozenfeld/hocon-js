@@ -86,7 +86,7 @@ function parseHocon(text) {
               if (currentValue === '')
                 continue;
               if (isInArray && isReadingValue) {
-                currentValue += '' + c;
+                currentValue += c;
                 continue;
               }
             }
