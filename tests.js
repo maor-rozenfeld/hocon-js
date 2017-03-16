@@ -190,3 +190,11 @@ a multiline string.
     'This is\na multiline string.\n...and it even has some "quotes" in it.'
   );
 });
+
+
+QUnit.test('String concatenation on array values without comma', function(
+  assert) {
+  var obj = parseHocon('{ a: [ 1 2 3 4 ]}');
+  assert.equal(obj.a.length, 1);
+  assert.equal(obj.a[0], '1 2 3 4');
+});
