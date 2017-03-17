@@ -65,7 +65,7 @@ Usage:
 | Multiline Strings (`"""`) |  :white_check_mark: | `myKey: """what's happening"""`
 | Path Expressions |  :white_check_mark: | `myRoot.myKey.someKey : 4`
 | Substitutions |  :white_check_mark: | `myKey: $(myRoot.myKey)`
+| String Concatenation in Arrays | :white_check_mark: | `myArr: [hello there]` |
 | Objects Merging | :x: | |
 | Value Concatenation | :x: | |
-| String Concatenation | :white_check_mark: | |
 | `include` | :x: | | |
