@@ -241,15 +241,9 @@ function parseHocon(text) {
 
       if (!isInQuotes && typeof currentValue === 'string') {
         if (/^\d+$/.test(currentValue))
-          if (Array.isArray(currentValue))
-            currentValue = [parseInt(currentValue)];
-          else
-            currentValue = parseInt(currentValue);
+          currentValue = parseInt(currentValue);
         else if (/^\d+\.\d+$/.test(currentValue))
-          if (Array.isArray(currentValue))
-            currentValue = [parseFloat(currentValue)];
-          else
-            currentValue = parseFloat(currentValue);
+          currentValue = parseFloat(currentValue);
       }
 
       if (isInArray) {
