@@ -1,0 +1,23 @@
+{
+  "name": "hoconjs",
+  "version": "1.0.0",
+  "description": "This is a very basic [Hocon](https://github.com/typesafehub/config/blob/master/HOCON.md) parser written in JavaScript.",
+  "main": "hoconjs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yellowblood/hocon-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yellowblood/hocon-js/issues"
+  },
+  "homepage": "https://github.com/yellowblood/hocon-js#readme",
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-qunit": "^1.3.0"
+  }
+}
