@@ -82,6 +82,14 @@ function parseHocon(text) {
       if (!isInQuotes)
         switch (c) {
           case ' ':
+            {
+              if (currentValue === '')
+                continue;
+              if (isInArray && isReadingValue) {
+                currentValue += c;
+                continue;
+              }
+            }
           case '\t':
           case '\r':
           case '\n':
@@ -165,8 +173,12 @@ function parseHocon(text) {
             {
               if (!isInArray)
                 throw 'not in an array';
-              if (currentValue)
+
+              if (currentValue) {
+                currentValue = currentValue.trim();
                 setValue();
+              }
+
               return obj;
             }
           case '$':

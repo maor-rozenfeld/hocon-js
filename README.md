@@ -67,4 +67,5 @@ Usage:
 | Substitutions |  :white_check_mark: | `myKey: $(myRoot.myKey)`
 | Objects Merging | :x: | |
 | Value Concatenation | :x: | |
+| String Concatenation | :white_check_mark: | |
 | `include` | :x: | | |
