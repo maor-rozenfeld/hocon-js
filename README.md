@@ -1,3 +1,6 @@
+[![Travis Build Status](https://travis-ci.org/yellowblood/hocon-js.svg?branch=master)](https://travis-ci.org/yellowblood/hocon-js)
+
+# HoconJS
 
 This is a very basic [Hocon](https://github.com/typesafehub/config/blob/master/HOCON.md) parser written in JavaScript.
 
