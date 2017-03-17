@@ -239,7 +239,7 @@ function parseHocon(text) {
         return;
       }
 
-      if (!isInQuotes) {
+      if (!isInQuotes && typeof currentValue === 'string') {
         if (/^\d+$/.test(currentValue))
           currentValue = parseInt(currentValue);
         else if (/^\d+\.\d+$/.test(currentValue))
