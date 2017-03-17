@@ -5,5 +5,3 @@ before_script:
   - npm install
 
 script: grunt test --verbose --force
-notifications:
-  slack: logzio:r28RgZwbVFZle4CqV34psNvK
