@@ -244,6 +244,12 @@ function parseHocon(text) {
           currentValue = parseInt(currentValue);
         else if (/^\d+\.\d+$/.test(currentValue))
           currentValue = parseFloat(currentValue);
+        else if (currentValue === 'true')
+          currentValue = true;
+        else if (currentValue === 'false')
+          currentValue = false;
+        else if (currentValue === 'null')
+          currentValue = null;
       }
 
       if (isInArray) {

@@ -45,6 +45,28 @@ QUnit.test("parse string", function(assert) {
   assert.equal(obj.x, 'a2.1');
 });
 
+QUnit.test("parse boolean values", function(assert) {
+  var obj = parseHocon(
+    `{
+    a: true,
+    b: false,
+    c: [1, true, false, hello]
+  }`);
+  assert.equal(obj.a, true);
+  assert.equal(obj.b, false);
+  assert.equal(obj.c.length, 4);
+  assert.equal(obj.c[0], 1);
+  assert.equal(obj.c[1], true);
+  assert.equal(obj.c[2], false);
+  assert.equal(obj.c[3], 'hello');
+});
+
+QUnit.test("parse null value", function(assert) {
+  var obj = parseHocon('a: null, b: 1');
+  assert.equal(obj.a, null);
+  assert.equal(obj.b, 1);
+});
+
 QUnit.test("parse deep key", function(assert) {
   var obj = parseHocon('x.y.z : 300');
   assert.equal(obj.x.y.z, 300);
