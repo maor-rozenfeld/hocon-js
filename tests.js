@@ -208,4 +208,16 @@ QUnit.test('String concatenation on array values without comma', function(
   assert.equal(obj.a[0], '1 2 3 4');
 });
 
+QUnit.test('String concatenation in field keys', function(assert) {
+  var obj = parseHocon(`{
+    a: 42,
+    a b : 3
+  }`);
+  console.log(JSON.stringify(obj));
+  assert.equal(Object.keys(obj).length, 2);
+  assert.equal(obj.a, 42);
+  assert.equal(obj.hasOwnProperty('a b'), true);
+  assert.equal(obj['a b'], 3);
+});
+
 QUnit.start();
