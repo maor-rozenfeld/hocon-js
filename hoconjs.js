@@ -85,7 +85,6 @@ function parseHocon(text) {
             {
               if (currentKey !== '' && !isReadingValue) {
                 currentKey += c;
-                console.log('adding to key : ' + c);
                 continue;
               }
               if (currentValue === '')

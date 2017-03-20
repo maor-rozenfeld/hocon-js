@@ -47,11 +47,7 @@ QUnit.test("parse string", function(assert) {
 
 QUnit.test("parse boolean values", function(assert) {
   var obj = parseHocon(
-    `{
-    a: true,
-    b: false,
-    c: [1, true, false, hello]
-  }`);
+    '{    a: true,\n    b: false,\n    c: [1, true, false, hello]\n  }');
   assert.equal(obj.a, true);
   assert.equal(obj.b, false);
   assert.equal(obj.c.length, 4);
@@ -209,11 +205,7 @@ QUnit.test('String concatenation on array values without comma', function(
 });
 
 QUnit.test('String concatenation in field keys', function(assert) {
-  var obj = parseHocon(`{
-    a: 42,
-    a b : 3
-  }`);
-  console.log(JSON.stringify(obj));
+  var obj = parseHocon('{\n    a: 42,\n    a b : 3\n  }');
   assert.equal(Object.keys(obj).length, 2);
   assert.equal(obj.a, 42);
   assert.equal(obj.hasOwnProperty('a b'), true);
