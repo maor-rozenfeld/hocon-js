@@ -83,6 +83,10 @@ function parseHocon(text) {
         switch (c) {
           case ' ':
             {
+              if (currentKey !== '' && !isReadingValue) {
+                currentKey += c;
+                continue;
+              }
               if (currentValue === '')
                 continue;
               if (isInArray && isReadingValue) {
@@ -121,6 +125,7 @@ function parseHocon(text) {
             {
               if (isInCurly || isInArray || currentKey) {
                 index--;
+                currentKey = currentKey.trim();
                 currentValue = readHocon(hoconText);
                 setValue();
                 continue;
@@ -148,6 +153,9 @@ function parseHocon(text) {
                 throw 'Already met seperator';
               isReadingValue = true;
               isReadSeperator = true;
+
+              currentKey = currentKey.trim();
+
               continue;
             }
           case ',':
