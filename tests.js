@@ -212,4 +212,11 @@ QUnit.test('String concatenation in field keys', function(assert) {
   assert.equal(obj['a b'], 3);
 });
 
+QUnit.test('String concatenation in field keys after dot', function(assert) {
+  var obj = parseHocon('{ a.  ab c : 42 }');
+  assert.equal(Object.keys(obj).length, 1);
+  assert.equal(obj.a.hasOwnProperty('  ab c'), true);
+  assert.equal(obj.a['  ab c'], 42);
+});
+
 QUnit.start();
