@@ -8,8 +8,23 @@ It does almost no validation whatsoever but can create an object from most hocon
 
 Please feel free to contribute with PRs.
 
-Usage:
-```var obj = parseHocon(someHoconText);```
+This module is intended to work in the browser and nodejs.    
+
+Browser usage :  
+```
+<script type="text/javascript" src="./build/hoconjs.min.js"></script>
+<script type="text/javascript">
+    var obj = parseHocon(someHoconText);
+</script>```
+
+NodeJS :  
+```
+var parseHocon = require('./build/hoconjs.min.js');
+var obj = parseHocon(someHoconText);```
+
+## Scripts  
+* Running tests : `npm test`  
+* Building source : `npm run release`
 
 ## Example Output
 

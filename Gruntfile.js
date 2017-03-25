@@ -1,14 +1,38 @@
 module.exports = function(grunt) {
-    // Project configuration.
-    grunt.initConfig({
-        qunit: {
-            files: ['tests.html']
+
+  grunt.initConfig({
+    qunit: {
+      files: ['tests.html']
+    },
+    umd: {
+      build: {
+        options: {
+          src: './hoconjs.js',
+          dest: './build/hoconjs.js',
+          objectToExport: 'parseHocon'
         }
-    });
+      }
+    },
+    uglify: {
+      build: {
+        files: {
+          './build/hoconjs.min.js': ['./build/hoconjs.js']
+        }
+      },
+      options: {
+        mangle: true,
+        sourceMap: true
+      }
+    }
+  });
 
-    // Load plugin
-    grunt.loadNpmTasks('grunt-contrib-qunit');
+  // Load grunt plugins
+  grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-umd');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    // Task to run tests
-    grunt.registerTask('test', 'qunit');
+  // Tasks
+  grunt.registerTask('test', 'qunit');
+  grunt.registerTask('release', ['umd:build', 'uglify:build']);
+
 };
