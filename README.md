@@ -15,12 +15,14 @@ Browser usage :
 <script type="text/javascript" src="./build/hoconjs.min.js"></script>
 <script type="text/javascript">
     var obj = parseHocon(someHoconText);
-</script>```
+</script>
+```
 
 NodeJS :  
 ```
 var parseHocon = require('./build/hoconjs.min.js');
-var obj = parseHocon(someHoconText);```
+var obj = parseHocon(someHoconText);
+```
 
 ## Scripts  
 * Running tests : `npm test`  
