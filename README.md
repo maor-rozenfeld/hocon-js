@@ -25,6 +25,7 @@ var obj = parseHocon(someHoconText);
 ```
 
 ## Scripts  
+* Installing : `npm install hoconjs`  
 * Running tests : `npm test`  
 * Building source : `npm run release`
 
