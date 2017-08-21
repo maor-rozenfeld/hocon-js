@@ -276,6 +276,10 @@ function parseHocon(text) {
   }
 
   function handleSubtitutions(mainObj, intermidiateObj, loops) {
+    loops = loops || 0;
+    if (loops > 8)
+      return null;
+
     intermidiateObj = typeof intermidiateObj === 'undefined' ? mainObj :
       intermidiateObj;
     if (intermidiateObj == null)
@@ -288,7 +292,10 @@ function parseHocon(text) {
     } else if (typeof intermidiateObj === 'string') {
       var match = /^\$\{(.+?)\}$/.exec(intermidiateObj);
       if (match && match.length == 2) {
-        return eval('mainObj.' + match[1]);
+        var val = eval('mainObj.' + match[1]);
+        if (typeof val === 'undefined')
+          return null;
+        return handleSubtitutions(mainObj, val, loops + 1);
       }
     } else if (typeof intermidiateObj === 'object') {
       Object.keys(intermidiateObj).forEach(function(key, index) {

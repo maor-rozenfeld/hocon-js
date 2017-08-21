@@ -204,6 +204,19 @@ QUnit.test('String concatenation on array values without comma', function(
   assert.equal(obj.a[0], '1 2 3 4');
 });
 
+QUnit.test('Subtitutions inside substitutions', function(assert) {
+  var obj = parseHocon("{ c: ${b}, b: ${a}, a: 100 }");
+  assert.equal(obj.a, 100);
+  assert.equal(obj.b, 100);
+  assert.equal(obj.c, 100);
+});
+
+QUnit.test('Subtitutions recursion', function(assert) {
+  var obj = parseHocon("{ a: ${b}, b: ${a} }");
+  assert.equal(obj.a, null);
+  assert.equal(obj.b, null);
+});
+
 QUnit.test('String concatenation in field keys', function(assert) {
   var obj = parseHocon('{\n    a: 42,\n    a b : 3\n  }');
   assert.equal(Object.keys(obj).length, 2);
