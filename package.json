@@ -1,6 +1,6 @@
 {
-  "name": "hoconjs",
-  "version": "1.1.0",
+  "name": "hocon-parser",
+  "version": "1.0.0",
   "description": "This is a very basic [Hocon](https://github.com/typesafehub/config/blob/master/HOCON.md) parser written in JavaScript.",
   "main": "index.js",
   "scripts": {
