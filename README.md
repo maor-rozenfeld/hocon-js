@@ -12,7 +12,7 @@ This module is intended to work in the browser and nodejs.
 
 Browser usage :  
 ```
-<script type="text/javascript" src="./build/hoconjs.min.js"></script>
+<script type="text/javascript" src="/node_modules/hocon-parser/hocon.min.js"></script>
 <script type="text/javascript">
     var obj = parseHocon(someHoconText);
 </script>
@@ -20,12 +20,12 @@ Browser usage :
 
 NodeJS :  
 ```
-var parseHocon = require('./build/hoconjs.min.js');
+var parseHocon = require('hocon-parser');
 var obj = parseHocon(someHoconText);
 ```
 
 ## Scripts  
-* Installing : `npm install hoconjs`  
+* Installing : `npm install hocon-parser`
 * Running tests : `npm test`  
 * Building source : `npm run release`
 
