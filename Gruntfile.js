@@ -2,13 +2,13 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     qunit: {
-      files: ['tests.html']
+      files: ['tests/tests.html']
     },
     umd: {
       build: {
         options: {
-          src: './hoconjs.js',
-          dest: './build/hoconjs.js',
+          src: './src/hocon.js',
+          dest: './index.js',
           objectToExport: 'parseHocon'
         }
       }
@@ -16,7 +16,7 @@ module.exports = function(grunt) {
     uglify: {
       build: {
         files: {
-          './build/hoconjs.min.js': ['./build/hoconjs.js']
+          'hocon.min.js': ['src/hocon.js']
         }
       },
       options: {
