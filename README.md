@@ -90,3 +90,4 @@ var obj = parseHocon(someHoconText);
 | Objects Merging | :x: | |
 | Value Concatenation | :x: | |
 | `include` | :x: | | |
+| Fallbacks | :x: | |
