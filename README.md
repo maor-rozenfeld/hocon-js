@@ -1,4 +1,4 @@
-[![Travis Build Status](https://travis-ci.org/yellowblood/hocon-js.svg?branch=master)](https://travis-ci.org/yellowblood/hocon-js)
+[![Travis Build Status](https://travis-ci.org/maor-rosenfeld/hocon-js.svg?branch=master)](https://travis-ci.org/maor-rosenfeld/hocon-js)
 
 # HoconJS
 
